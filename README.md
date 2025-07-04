@@ -13,6 +13,11 @@ Deploy a basic "Hello World" Node.js app using Kubernetes on Minikube or Docker 
 * Node.js and npm
 * Docker
 * Kubernetes (Minikube or Docker Desktop with K8s enabled)
+
+![image](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/enable%20kubernetes%20on%20docker.png)
+
+![screenshot](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/our%20kubernetes%20cluster%20running%20on%20docker.png)
+
 * kubectl (Kubernetes CLI)
 * VS Code or any code editor
 
@@ -28,6 +33,7 @@ Deploy a basic "Hello World" Node.js app using Kubernetes on Minikube or Docker 
 mkdir k8s-node-app && cd k8s-node-app
 npm init -y
 ```
+![screenshot](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/create%20folder%20and%20initiali.png)
 
 Create a file named `index.js`:
 
@@ -44,14 +50,18 @@ app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
 ```
+![screenshot](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/content%20of%20index%20js.png)
 
 Install express:
 
 ```bash
 npm install express
 ```
+![image](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/install%20express%20js.png)
 
 Create a `Dockerfile`:
+
+![image](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/creating%20dockerfile.png)
 
 ```Dockerfile
 FROM node:18
@@ -62,8 +72,8 @@ COPY . .
 EXPOSE 3000
 CMD ["node", "index.js"]
 ```
+![image](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/content%20of%20dockerfile.png)
 
----
 
 ### **Step 2: Build and Push the Docker Image**
 
@@ -73,12 +83,14 @@ If using Docker Hub:
 docker build -t <your-dockerhub-username>/k8s-node-app .
 docker push <your-dockerhub-username>/k8s-node-app
 ```
+![screenshot](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/building%20and%20pushing%20our%20app%20to%20docker%20hub.png)
 
----
 
 ### **Step 3: Create Kubernetes Deployment YAML**
 
 Create a file named `deployment.yaml`:
+
+[image](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/creating%20deployment%20yaml%20file.png)
 
 ```yaml
 apiVersion: apps/v1
@@ -101,12 +113,13 @@ spec:
         ports:
         - containerPort: 3000
 ```
-
----
+![image](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/content%20of%20deployment%20yaml.png)
 
 ### **Step 4: Create Kubernetes Service YAML**
 
 Create a file named `service.yaml`:
+
+![image](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/creating%20service%20yaml%20file.png)
 
 ```yaml
 apiVersion: v1
@@ -122,8 +135,7 @@ spec:
       targetPort: 3000
       nodePort: 30036
 ```
-
----
+![image](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/content%20of%20service%20yaml%20file.png)
 
 ### **Step 5: Deploy to Kubernetes**
 
@@ -134,7 +146,7 @@ kubectl apply -f deployment.yaml
 kubectl apply -f service.yaml
 ```
 
----
+![image](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/applying%20kubectl%20on%20the%20files.png)
 
 ### **Step 6: Access Your App**
 
@@ -153,7 +165,7 @@ http://localhost:30036
 You should see:
 **"Hello World from Kubernetes!"**
 
----
+![screenshot](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/our%20app%20on%20local%20host.png)
 
 ### **Step 7: Verify Everything is Running**
 
@@ -163,9 +175,9 @@ kubectl get services
 kubectl describe deployment node-app-deployment
 ```
 
----
+![image](https://github.com/Prince-Tee/nodejs-kubernetes-docker-app/blob/main/screenshot%20from%20my%20local%20environment/verifying%20that%20everything%20is%20now%20working.png)
 
-### **Concepts You’ve Practiced:**
+### **Concepts We have Practiced:**
 
 * Creating a containerized Node.js app
 * Writing a Dockerfile
@@ -174,7 +186,7 @@ kubectl describe deployment node-app-deployment
 * Using `kubectl` for deployments and inspections
 
 
-# Issues Encountered During Kubernetes Node App Deployment
+## Issues Encountered During Kubernetes Node App Deployment
 
 ## 1️⃣ Docker Build and Push Errors
 
